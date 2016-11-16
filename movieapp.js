@@ -1,4 +1,5 @@
 var app = angular.module("MovieApp", []);
+
 app.factory('MovieService', function($http) {
   var service = {};
   var API_KEY = '8fa482ca4a8b8964d4f857eee886e8e9';
@@ -13,8 +14,13 @@ app.factory('MovieService', function($http) {
   return service;
 });
 
-app.controller('MainController', function(MovieService) {
-  MovieService.nowPlaying().success(function(movieResults) {
-    console.log('Movie results', movieResults);
+app.controller('MainController', function($scope, MovieService) {
+    $scope.clickNowPlaying = function(){
+        MovieService.nowPlaying()
+            .success(function(movieResults) {
+                // got movie results
+                // $scope.nowMovies = movieResults;
+                console.log('Movie results', movieResults);
+            });
+    };
   });
-});

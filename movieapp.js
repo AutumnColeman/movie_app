@@ -11,6 +11,15 @@ app.factory('MovieService', function($http) {
       params: { api_key: API_KEY }
     });
   };
+
+  service.movieDetails = function(movieId) {
+    var url = 'http://api.themoviedb.org/3/movie/' + movieId;
+    return $http({
+      method: 'GET',
+      url: url,
+      params: { api_key: API_KEY }
+    });
+  };
   return service;
 });
 
@@ -22,5 +31,13 @@ app.controller('MainController', function($scope, MovieService) {
                 // $scope.nowMovies = movieResults;
                 console.log('Movie results', movieResults);
             });
+    };
+
+    $scope.clickMovieDetails = function() {
+      MovieService.movieDetails($scope.id)
+          .success(function(movieDetails) {
+            //give movie details, I hope
+            console.log('Movie details', movieDetails);
+          });
     };
   });

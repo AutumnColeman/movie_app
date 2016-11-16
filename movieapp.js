@@ -3,6 +3,7 @@ var app = angular.module("MovieApp", []);
 app.factory('MovieService', function($http) {
   var service = {};
   var API_KEY = '8fa482ca4a8b8964d4f857eee886e8e9';
+
   service.nowPlaying = function() {
     var url = 'http://api.themoviedb.org/3/movie/now_playing';
     return $http({
@@ -17,7 +18,17 @@ app.factory('MovieService', function($http) {
     return $http({
       method: 'GET',
       url: url,
-      params: { api_key: API_KEY }
+      params: { api_key: API_KEY}
+    });
+  };
+
+  service.movieSearch = function(query) {
+    var url = 'http://api.themoviedb.org/3/search/movie';
+    return $http({
+      method: 'GET',
+      url: url,
+      params: { api_key: API_KEY,
+      query: query }
     });
   };
   return service;
@@ -38,6 +49,14 @@ app.controller('MainController', function($scope, MovieService) {
           .success(function(movieDetails) {
             //give movie details, I hope
             console.log('Movie details', movieDetails);
+          });
+    };
+
+    $scope.clickMovieSearch = function(query) {
+      MovieService.movieSearch($scope.query)
+          .success(function(movieDetails) {
+            //give movie details, I hope
+            console.log('Search details', movieDetails);
           });
     };
   });

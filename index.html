@@ -8,8 +8,10 @@
     <script src="movieapp.js"></script>
   </head>
   <body ng-app="MovieApp" ng-controller="MainController">
-    <button ng-click="clickNowPlaying()">Now Playing</button>
+    <button ng-click="clickNowPlaying()">Now Playing</button><br>
     <input type="text" name="name" ng-model="id">
-    <button ng-click="clickMovieDetails()">Get Movie Details</button>
+    <button ng-click="clickMovieDetails()">Get Movie Details</button><br>
+    <input type="text" name="name" ng-model="query">
+    <button ng-click="clickMovieSearch()">Movie Search</button>
   </body>
 </html>
